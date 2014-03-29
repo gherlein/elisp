@@ -7,10 +7,12 @@
 ;;(set-foreground-color "white")
 ;;(set-background-color "#708090")
 ;(delete-selection-mode 1)
-;(set-frame-height (selected-frame) 80)
-;(set-frame-width (selected-frame)  90)
 (setq vc-follow-symlinks nil);
 (setq vc-consult-headers nil);
+(if window-system 
+    (set-frame-height (selected-frame) 80)
+    (set-frame-width (selected-frame)  90))
+
 
 ; Dont show the GNU splash screen
 (setq inhibit-startup-message t)
