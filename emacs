@@ -9,8 +9,17 @@
 ;(delete-selection-mode 1)
 ;(set-frame-height (selected-frame) 80)
 ;(set-frame-width (selected-frame)  90)
+
 (setq vc-follow-symlinks nil);
 (setq vc-consult-headers nil);
+
+(if window-system
+    (set-frame-height (selected-frame) 80)
+    (set-frame-width (selected-frame)  120))
+
+(defun ask-user-about-supersession-threat (fn)
+  "blatantly ignore files that changed on disk")
+
 
 ; Dont show the GNU splash screen
 (setq inhibit-startup-message t)
@@ -109,13 +118,12 @@
   (c-set-offset 'member-init-intro '++)
   (setq c-basic-offset 2)
   ;;(setq-default c-basic-offset 2 c-default-style "linux")
-
   ;; other customizations
   (setq tab-width 2
   ;; this will make sure spaces are used instead of tabs
   indent-tabs-mode nil)
   ;; we like auto-newline and hungry-delete
-  (c-toggle-auto-hungry-state 1)
+  ;;  (c-toggle-auto-hungry-state 1)
   ;; keybindings for all supported languages.  We can put these in
   ;; c-mode-base-map because c-mode-map, c++-mode-map, objc-mode-map,
   ;; java-mode-map, and idl-mode-map inherit from it.
@@ -248,8 +256,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(case-fold-search t)
- '(current-language-environment "Latin-1")
- '(default-input-method "latin-1-prefix")
  '(global-font-lock-mode t nil (font-lock))
  '(show-paren-mode t nil (paren))
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
