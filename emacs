@@ -4,8 +4,8 @@
 ;
 ;(server-start)
 
-(set-foreground-color "white")
-(set-background-color "#708090")
+;;(set-foreground-color "white")
+;;(set-background-color "#708090")
 ;(delete-selection-mode 1)
 (set-frame-height (selected-frame) 80)
 (set-frame-width (selected-frame)  90)
