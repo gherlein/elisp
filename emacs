@@ -2,7 +2,34 @@
 ;
 ; note:  you can get a def of a keypress by using dumpkeys
 ;
-;(server-start)
+
+(defun set-frame-size-according-to-resolution ()
+  (interactive)
+  (if window-system
+  (progn
+    ;; use 180 char wide window for largeish displays
+    ;; and smaller 80 column windows for smaller displays
+    ;; pick whatever numbers make sense for you
+    (if (> (x-display-pixel-width) 1280)
+        (add-to-list 'default-frame-alist (cons 'width 120))
+      (add-to-list 'default-frame-alist (cons 'width 80)))
+    ;; for the height, subtract a couple hundred pixels
+    ;; from the screen height (for panels, menubars and
+    ;; whatnot), then divide by the height of a char to
+    ;; get the height we want
+    (add-to-list 'default-frame-alist 
+                 (cons 'height (/ (- (x-display-pixel-height) 110) (frame-char-height)))))))
+ 
+(set-frame-size-according-to-resolution)
+
+
+;; We have CPU to spare; highlight all syntax categories.
+(setq font-lock-maximum-decoration t)
+(defun ask-user-about-supersession-threat (fn)
+  "blatantly ignore files that changed on disk")
+(defun ask-user-about-lock (file opponent)
+  "always grab lock" t)
+(global-auto-revert-mode 1)
 
 ;;(set-foreground-color "white")
 ;;(set-background-color "#708090")
@@ -43,16 +70,11 @@
 (add-hook 'brightscript-mode-hook 'remove-dos-eol)
 
 (setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
-
 (setq html-helper-do-write-file-hooks t)
 (setq html-helper-build-new-buffer t)
-;
 (line-number-mode 1)
-;; This tells emacs to show the line number in each modeline.
-;
 (column-number-mode 1)
-;; This tells emacs to show the column number in each modeline. 
-;
+
 ;--Disable the menu-bar in console mode for a little more screen space. 
 ; You can still use F10 to access it in the minibuffer
 (menu-bar-mode (if window-system 1 -1)) 
