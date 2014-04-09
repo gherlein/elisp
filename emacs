@@ -25,11 +25,6 @@
 
 ;; We have CPU to spare; highlight all syntax categories.
 (setq font-lock-maximum-decoration t)
-(defun ask-user-about-supersession-threat (fn)
-  "blatantly ignore files that changed on disk")
-(defun ask-user-about-lock (file opponent)
-  "always grab lock" t)
-(global-auto-revert-mode 1)
 
 ;;(set-foreground-color "white")
 ;;(set-background-color "#708090")
@@ -50,7 +45,11 @@
 ;
 ;;  (setq any mode-customization variables you want here)
 ;(autoload 'html-helper-mode "html-helper-mode" "HTMLHelper mode." t)
-(autoload 'python-mode "python-mode" "Python Mode." t)
+;(autoload 'python-mode "python-mode" "Python Mode." t)
+
+(setq py-install-directory "~/elisp")
+(require 'python-mode)
+
 ;(add-to-list 'auto-mode-alist '("\\.py\\" . python-mode))
 ;(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
