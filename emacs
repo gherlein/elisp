@@ -45,10 +45,7 @@
 ;
 ;;  (setq any mode-customization variables you want here)
 ;(autoload 'html-helper-mode "html-helper-mode" "HTMLHelper mode." t)
-;(autoload 'python-mode "python-mode" "Python Mode." t)
-
 (setq py-install-directory "~/elisp")
-(require 'python-mode)
 
 ;(add-to-list 'auto-mode-alist '("\\.py\\" . python-mode))
 ;(add-to-list 'interpreter-mode-alist '("python" . python-mode))
