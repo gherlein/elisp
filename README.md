@@ -1,9 +1,15 @@
-Greg Herlein's emacs stuff
+#Greg Herlein's emacs stuff
 
-INSTALL
+##INSTALL
 
-From this folder:
+Check out this project to a local folder:
 
-ln -s emacs ~/.emacs
+      git clone git@github.com:gherlein/elisp.git
 
-Note:  assumes that this folder is ~/elisp
+Then make this folder your default emacs:
+
+     mv elisp ~/.emacs.d
+
+
+
+
