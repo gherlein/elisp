@@ -2,6 +2,7 @@
 ;
 ; note:  you can get a def of a keypress by using dumpkeys
 ;
+(add-to-list 'load-path "~/elisp")
 
 (defun set-frame-size-according-to-resolution ()
   (interactive)
