@@ -3,7 +3,7 @@
 ; note:  you can get a def of a keypress by using dumpkeys
 ;
 (add-to-list 'load-path "~/elisp")
-
+(electric-indent-mode 0)
 (defun set-frame-size-according-to-resolution ()
   (interactive)
   (if window-system
@@ -116,6 +116,11 @@
     (c-echo-syntactic-information-p . t)
   )
 )
+;
+
+(add-hook 'yaml-mode-hook
+  (lambda ()
+    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 ;
 ;
 (defun my-c-mode-common-hook ()
