@@ -23,6 +23,10 @@
  
 (set-frame-size-according-to-resolution)
 
+(add-hook 'yaml-mode-hook
+    (lambda ()
+       (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
 
 ;; We have CPU to spare; highlight all syntax categories.
 (setq font-lock-maximum-decoration t)
