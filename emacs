@@ -27,7 +27,6 @@
     (lambda ()
        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-
 ;; We have CPU to spare; highlight all syntax categories.
 (setq font-lock-maximum-decoration t)
 
@@ -58,6 +57,9 @@
 (add-to-list 'auto-mode-alist '("\\.pl$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pm$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.smil" . xml-mode))
+
+
+(autoload 'scad-mode "scad-mode" "A major mode for editing OpenSCAD code." t)
 (add-to-list 'auto-mode-alist '("\\.scad$" . scad-mode))
 
 (require 'brightscript-mode)
