@@ -58,6 +58,7 @@
 (add-to-list 'auto-mode-alist '("\\.pl$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pm$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.smil" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.scad$" . scad-mode))
 
 (require 'brightscript-mode)
 (add-to-list 'auto-mode-alist '("\\.brs" . brightscript-mode))
