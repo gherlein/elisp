@@ -54,6 +54,7 @@
 ;(add-to-list 'auto-mode-alist '("\\.py\\" . python-mode))
 ;(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
+(add-to-list 'auto-mode-alist '("\\.ino$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pm$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.smil" . xml-mode))
