@@ -46,6 +46,28 @@
 ;
 ;; Open unidentified files in text mode
 (setq default-major-mode 'text-mode)
+
+;; golang stuff
+(require 'go-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;;
+;;
+(when window-system (set-exec-path-from-shell-PATH))
+(add-to-list 'exec-path "~/go/bin")
+(defun my-go-mode-hook ()
+  ; Call Gofmt before saving                                                    
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  ; Godef jump key binding                                                      
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+  )
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+(defun auto-complete-for-go ()
+  (auto-complete-mode 1))
+(add-hook 'go-mode-hook 'auto-complete-for-go)
+
+
 ;
 ;;  (setq any mode-customization variables you want here)
 ;(autoload 'html-helper-mode "html-helper-mode" "HTMLHelper mode." t)
