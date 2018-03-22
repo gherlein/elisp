@@ -82,7 +82,7 @@
   (auto-complete-mode 1))
 (add-hook 'go-mode-hook 'auto-complete-for-go)
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 (defconst my-c-style
   '((c-tab-always-indent        . t)
     (c-comment-only-line-offset . 0)
