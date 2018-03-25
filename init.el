@@ -50,6 +50,8 @@
 (global-set-key [f2]      'save-buffer)
 
 (global-set-key [f6]      'goto-line)
+(global-set-key [f7]      'c-reformat-buffer)
+
 (global-set-key [f8]      'beginning-of-buffer)
 (global-set-key [f9]      'end-of-buffer)
 
@@ -107,6 +109,7 @@
 
 (defun my-c-mode-common-hook ()
   ;; add my personal style and set it for the current buffer
+  (require 'cc-mode)
   (c-add-style "PERSONAL" my-c-style t)
   ;; offset customizations not in my-c-style
   (c-set-offset 'member-init-intro '++)
@@ -117,19 +120,42 @@
   (setq tab-width 2
 	;; this will make sure spaces are used instead of tabs
 	indent-tabs-mode nil)
-  ;; we like auto-newline and hungry-delete
   (c-toggle-auto-hungry-state 1)
-  ;; keybindings for all supported languages.  We can put these in
-  ;; c-mode-base-map because c-mode-map, c++-mode-map, objc-mode-map,
-  ;; java-mode-map, and idl-mode-map inherit from it.
   (define-key c-mode-base-map "\C-m" 'newline-and-indent)
+  (add-hook 'c-mode-common-hook '(lambda () (c-toggle-auto-state 1)))
   (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
-  (local-set-key (kbd "<f7>") 'c-indent-function)
   )
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 (add-hook 'c-mode-common-hook '(lambda () (font-lock-mode 1)))
-(setq c-basic-offset 2)
 
+
+(defun c-reformat-buffer()
+    (interactive)
+    (save-buffer)
+    (setq sh-indent-command (concat
+                             "indent -st -bad --blank-lines-after-procedures "
+                             "-bli0 -i4 -l79 -ncs -npcs -nut -npsl -fca "
+                             "-lc79 -fc1 -cli4 -bap -sob -ci4 -nlp "
+                             buffer-file-name
+                             )
+          )
+    (mark-whole-buffer)
+    (universal-argument)
+    (shell-command-on-region
+     (point-min)
+     (point-max)
+     sh-indent-command     (buffer-name)
+     )
+    (save-buffer)
+    )
+
+;;(define-key c-mode-base-map [f7] 'c-reformat-buffer)
+
+
+
+
+
+;;
 (add-hook 'yaml-mode-hook
 	  (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
