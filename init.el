@@ -48,6 +48,8 @@
 
 (global-set-key [f1]      'delete-other-windows)
 (global-set-key [f2]      'save-buffer)
+(global-set-key [f3]      'recompile)
+(global-set-key [f4]      'next-error)
 
 (global-set-key [f6]      'goto-line)
 (global-set-key [f7]      'c-reformat-buffer)
