@@ -63,7 +63,12 @@
 
 (autoload 'scad-mode "scad-mode" "A major mode for editing OpenSCAD code." t)
 (add-to-list 'auto-mode-alist '("\\.scad$" . scad-mode))
-(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
+;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(setq js2-mode-show-strict-warnings nil)
+
+
 
 (require 'brightscript-mode)
 (add-to-list 'auto-mode-alist '("\\.brs" . brightscript-mode))
