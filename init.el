@@ -68,6 +68,8 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq js2-mode-show-strict-warnings nil)
 
+(require 'prettier-js)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
 
 
 (require 'brightscript-mode)
