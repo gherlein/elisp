@@ -63,6 +63,8 @@
 
 (autoload 'scad-mode "scad-mode" "A major mode for editing OpenSCAD code." t)
 (add-to-list 'auto-mode-alist '("\\.scad$" . scad-mode))
+
+
 ;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -74,6 +76,9 @@
 
 (require 'brightscript-mode)
 (add-to-list 'auto-mode-alist '("\\.brs" . brightscript-mode))
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml" . yaml-mode))
 
 ;; golang stuff
 (require 'go-mode)
