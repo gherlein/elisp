@@ -50,6 +50,7 @@
 (global-set-key [f2]      'save-buffer)
 (global-set-key [f3]      'recompile)
 (global-set-key [f4]      'next-error)
+(global-set-key [f5]      'previous-error)
 
 (global-set-key [f6]      'goto-line)
 (global-set-key [f7]      'c-reformat-buffer)
@@ -82,17 +83,33 @@
 
 ;; golang stuff
 (require 'go-mode)
-(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (setq tab-width 4)
+            (setq indent-tabs-mode 1)))
 (when window-system (set-exec-path-from-shell-PATH))
 (add-to-list 'exec-path "~/go/bin")
 (defun my-go-mode-hook ()
   (add-hook 'before-save-hook 'gofmt-before-save)
+  (setq gofmt-command "goimports")   
+  (if (not (string-match "go" compile-command))   ; set compile command default
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet"))
+
+  ;; Key bindings specific to go-mode
+  (local-set-key (kbd "M-.") 'godef-jump)         ; Go to definition
+  (local-set-key (kbd "M-*") 'pop-tag-mark)       ; Return from whence you came
+  (local-set-key (kbd "M-p") 'compile)            ; Invoke compiler
   (local-set-key (kbd "M-.") 'godef-jump)
   (local-set-key (kbd "M-*") 'pop-tag-mark)
   (local-set-key (kbd "<f7>") 'go-indent-function)
   (local-set-key (kbd "<f4>") 'beginning-of-defun)
   (local-set-key (kbd "<f5>") 'end-of-defun)
-  )
+  
+  ;; Misc go stuff
+  (auto-complete-mode 1))                         ; Enable auto-complete mode
+
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 (defun auto-complete-for-go ()
   (auto-complete-mode 1))
