@@ -65,6 +65,10 @@
 (autoload 'scad-mode "scad-mode" "A major mode for editing OpenSCAD code." t)
 (add-to-list 'auto-mode-alist '("\\.scad$" . scad-mode))
 
+(autoload 'terraform-mode "terraform-mode" "A major mode for editing terraform code." t)
+(add-to-list 'auto-mode-alist '("\\.tf$" . terraform-mode))
+
+
 
 ;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
 (require 'js2-mode)

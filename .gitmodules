@@ -1,0 +1,6 @@
+[submodule "emacs-hcl-mode"]
+	path = emacs-hcl-mode
+	url = git@github.com:syohex/emacs-hcl-mode.git
+[submodule "terraform-mode"]
+	path = terraform-mode
+	url = git@github.com:emacsorphanage/terraform-mode.git
