@@ -65,8 +65,17 @@
 (autoload 'scad-mode "scad-mode" "A major mode for editing OpenSCAD code." t)
 (add-to-list 'auto-mode-alist '("\\.scad$" . scad-mode))
 
-(autoload 'terraform-mode "terraform-mode" "A major mode for editing terraform code." t)
-(add-to-list 'auto-mode-alist '("\\.tf$" . terraform-mode))
+(add-to-list 'load-path "~/elisp/terraform-mode")
+(add-to-list 'load-path "~/elisp/emacs-hcl-mode")
+(require 'terraform-mode)
+(require 'hcl-mode)
+(add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode))
+
+(add-to-list 'load-path "~/elisp/markdown-mode")
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
 
 
 
