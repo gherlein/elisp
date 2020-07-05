@@ -1,3 +1,22 @@
+
+
+;; Make startup faster by reducing the frequency of garbage;; collection.  The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
+
+;; The rest of the init file.
+
+;; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))
+
+;; Use a hook so the message doesn't get clobbered by other messages.
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+
 ;; Add the melpa package repository
 ;; Remember to always use HTTPS
 ;;
@@ -8,6 +27,7 @@
 
 ;; Initialize packages;;
 (package-initialize)
+
 
 ;; Configure basic startup
 (setq inhibit-startup-message t)
@@ -27,7 +47,8 @@
               (global-font-lock-mode t)
               ;; Maximum colors
               (setq font-lock-maximum-decoration t)))
-(require 'auto-complete)
+
+(require 'auto-complete )
 (global-auto-complete-mode t)
 
 (setq vc-follow-symlinks nil);
@@ -69,14 +90,14 @@
 
 (add-to-list 'load-path "~/elisp/terraform-mode")
 (add-to-list 'load-path "~/elisp/emacs-hcl-mode")
-(require 'terraform-mode)
-(require 'hcl-mode)
+(autoload 'terraform-mode "terraform-mode" t)
+(autoload 'hcl-mode "hcl-mode" t)
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode))
 (add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
 
 (add-to-list 'load-path "~/elisp/markdown-mode")
-(require 'markdown-mode)
+(autoload 'markdown-mode "markdown-mode" t)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 
@@ -84,22 +105,22 @@
 
 
 ;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
-(require 'js2-mode)
+(autoload 'js2-mode "js2-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (setq js2-mode-show-strict-warnings nil)
 
-(require 'prettier-js)
-(add-hook 'js2-mode-hook 'prettier-js-mode)
+(autoload 'prettier-js "prettier-js" t)
+;;(add-hook 'js2-mode-hook 'prettier-js-mode)
 
 
-(require 'brightscript-mode)
+(autoload 'brightscript-mode "brightscript-mode" t)
 (add-to-list 'auto-mode-alist '("\\.brs" . brightscript-mode))
 
-(require 'yaml-mode)
+(autoload 'yaml-mode "yaml-mode" t)
 (add-to-list 'auto-mode-alist '("\\.yml" . yaml-mode))
 
 ;; golang stuff
-(require 'go-mode)
+(autoload 'go-mode "go-mode" t)
 (add-hook 'go-mode-hook
           (lambda ()
             (add-hook 'before-save-hook 'gofmt-before-save)
@@ -207,9 +228,6 @@
 (add-hook 'yaml-mode-hook
 	  (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-
-(require 'auto-complete)
-(global-auto-complete-mode t)
 
 (defun go-indent-function ()
   "Find and mark the function boundaries and indent the region."
