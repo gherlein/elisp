@@ -78,7 +78,7 @@
 (add-to-list 'load-path "~/elisp/markdown-mode")
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
+(add-hook 'markdown-mode-hook 'turn-on-visual-line-mode)
 
 
 
