@@ -36,7 +36,7 @@
 ;(customize-set-variable 'tool-bar-mode nil)
 (customize-set-variable 'scroll-bar-mode nil)
 
-(set-default-font "Menlo 10")
+;;(set-default-font "Menlo 10")
 
 ;; basic window setups
 (electric-indent-mode 0)
