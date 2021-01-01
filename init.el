@@ -79,6 +79,9 @@
 (global-set-key [f8]      'beginning-of-buffer)
 (global-set-key [f9]      'end-of-buffer)
 
+
+
+
 (add-to-list 'auto-mode-alist '("\\.ino$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pm$" . c-mode))
@@ -107,11 +110,11 @@
 ;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
 (autoload 'js2-mode "js2-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 (setq js2-mode-show-strict-warnings nil)
-
-(autoload 'prettier-js "prettier-js" t)
-;;(add-hook 'js2-mode-hook 'prettier-js-mode)
-
+(add-hook 'js2-mode-hook
+          (lambda ()
+	    (define-key js-mode-map (kbd "<f7>") 'json-pretty-print-buffer)))
 
 (autoload 'brightscript-mode "brightscript-mode" t)
 (add-to-list 'auto-mode-alist '("\\.brs" . brightscript-mode))
@@ -128,6 +131,7 @@
             (setq indent-tabs-mode 1)))
 (when window-system (set-exec-path-from-shell-PATH))
 (add-to-list 'exec-path "~/go/bin")
+
 (defun my-go-mode-hook ()
   (add-hook 'before-save-hook 'gofmt-before-save)
   (setq gofmt-command "goimports")   
