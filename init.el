@@ -106,8 +106,8 @@
 
 
 
-
-;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.ts$" . c-mode)) auto-mode-alist))
 (autoload 'js2-mode "js2-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
