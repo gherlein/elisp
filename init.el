@@ -1,4 +1,4 @@
-;; Make startup faster by reducing the frequency of garbage;; collection.  The default is 800 kilobytes.  Measured in bytes.
+; Make startup faster by reducing the frequency of garbage;; collection.  The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Make startup faster by reducing the frequency of garbage
@@ -21,13 +21,48 @@
 ;; Remember to always use HTTPS
 ;;
 (add-to-list 'load-path "~/elisp")
-(require 'package) ;; You might already have this line
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+;;(require 'package) ;; You might already have this line
+;;(add-to-list 'package-archives
+;;             '("melpa" . "https://melpa.org/packages/"))
 
 ;; Initialize packages;;
-(package-initialize)
+;;(package-initialize)
+;;
+;;
+;; first, declare repositories
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+	("melpa-stable" . "http://stable.melpa.org/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")))
 
+;; Init the package facility
+(require 'package)
+(package-initialize)
+;;(package-refresh-contents) ;; this line is commented 
+;; since refreshing packages is time-consuming and should be done on demand
+
+;; Declare packages
+(setq my-packages
+      '(markdown-mode
+	docker-compose-mode
+	dockerfile-mode
+        wrap-region
+        yaml-mode
+        json-mode
+	js2-mode
+	js2-refactor
+	xref-js2
+	terraform-mode
+	rainbow-delimiters
+	go-mode))
+
+;; Iterate on packages and install missing ones
+(dolist (pkg my-packages)
+  (unless (package-installed-p pkg)
+    (package-install pkg)))
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; Configure basic startup
 (setq inhibit-startup-message t)
@@ -79,9 +114,6 @@
 (global-set-key [f8]      'beginning-of-buffer)
 (global-set-key [f9]      'end-of-buffer)
 
-
-
-
 (add-to-list 'auto-mode-alist '("\\.ino$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.pm$" . c-mode))
@@ -106,15 +138,20 @@
 
 
 
-(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
-(setq auto-mode-alist (append '(("\\.ts$" . c-mode)) auto-mode-alist))
+;;(setq auto-mode-alist (append '(("\\.js$" . c-mode)) auto-mode-alist))
+;;(setq auto-mode-alist (append '(("\\.ts$" . c-mode)) auto-mode-alist))
 (autoload 'js2-mode "js2-mode" t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js$\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts$\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
-(setq js2-mode-show-strict-warnings nil)
+;;(setq js2-mode-show-strict-warnings nil)
 (add-hook 'js2-mode-hook
           (lambda ()
 	    (define-key js-mode-map (kbd "<f7>") 'json-pretty-print-buffer)))
+;; Better imenu
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+(setq js2-use-font-lock-faces t)
+
 
 (autoload 'brightscript-mode "brightscript-mode" t)
 (add-to-list 'auto-mode-alist '("\\.brs" . brightscript-mode))
@@ -267,3 +304,17 @@
 
 
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (rainbow-delimiters json-mode yaml-mode wrap-region paredit markdown-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
