@@ -17,6 +17,9 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
+;; add mouse support
+(xterm-mouse-mode 1)
+
 ;; Add the melpa package repository
 ;; Remember to always use HTTPS
 ;;
