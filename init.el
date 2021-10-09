@@ -19,6 +19,13 @@
 
 ;; add mouse support
 (xterm-mouse-mode 1)
+;;;; Mouse scrolling in terminal emacs
+(unless (display-graphic-p)
+  ;; activate mouse-based scrolling
+  ;;(xterm-mouse-mode 1)
+  (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
+  )
 
 ;; Add the melpa package repository
 ;; Remember to always use HTTPS
@@ -146,6 +153,7 @@
 (autoload 'js2-mode "js2-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js$\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.ts$\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'"  . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
 ;;(setq js2-mode-show-strict-warnings nil)
 (add-hook 'js2-mode-hook
