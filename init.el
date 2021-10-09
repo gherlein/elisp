@@ -18,7 +18,6 @@
                      gcs-done)))
 
 ;; add mouse support
-(xterm-mouse-mode 1)
 ;;;; Mouse scrolling in terminal emacs
 (unless (display-graphic-p)
   ;; activate mouse-based scrolling
@@ -26,6 +25,8 @@
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
   )
+(setq x-select-enable-clipboard t)
+
 
 ;; Add the melpa package repository
 ;; Remember to always use HTTPS
