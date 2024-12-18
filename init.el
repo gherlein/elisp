@@ -1,6 +1,3 @@
-; Make startup faster by reducing the frequency of garbage;; collection.  The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
-
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
@@ -21,7 +18,7 @@
 ;;;; Mouse scrolling in terminal emacs
 (unless (display-graphic-p)
   ;; activate mouse-based scrolling
-  ;;(xterm-mouse-mode 1)
+  (xterm-mouse-mode 1)
   (global-set-key (kbd "<mouse-4>") 'scroll-down-line)
   (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
   )
@@ -31,13 +28,11 @@
 ;; Add the melpa package repository
 ;; Remember to always use HTTPS
 ;;
-(add-to-list 'load-path "~/elisp")
-;;(require 'package) ;; You might already have this line
-;;(add-to-list 'package-archives
-;;             '("melpa" . "https://melpa.org/packages/"))
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
 
-;; Initialize packages;;
-;;(package-initialize)
+(add-to-list 'load-path "~/elisp")
 ;;
 ;;
 ;; first, declare repositories
@@ -66,14 +61,26 @@
 	xref-js2
 	terraform-mode
 	rainbow-delimiters
-	go-mode))
+	go-mode
+	dash
+	s
+	f
+	editorconfig
+	jsonrpc))
 
 ;; Iterate on packages and install missing ones
 (dolist (pkg my-packages)
   (unless (package-installed-p pkg)
     (package-install pkg)))
 
+;; copilot
+(add-to-list 'load-path "~/elisp/copilot.el")
+(require 'copilot)
+
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'copilot-mode)
+(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
 
 ;; Configure basic startup
 (setq inhibit-startup-message t)
@@ -322,8 +329,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (rainbow-delimiters json-mode yaml-mode wrap-region paredit markdown-mode))))
+   '(rainbow-delimiters json-mode yaml-mode wrap-region paredit markdown-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
