@@ -1,4 +1,4 @@
-git submodule update --init
+git submodule update --init --recursive
 rm ~/.emacs.d
 rm ~/.emacs
 ln -s ~/elisp/ ~/.emacs.d
