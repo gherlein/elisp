@@ -79,7 +79,6 @@
 (add-hook 'prog-mode-hook 'copilot-mode)
 (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
 (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;; Configure basic startup
@@ -244,7 +243,7 @@
   (c-set-offset 'member-init-intro '++)
   (setq c-basic-offset 2)
   (setq-default c-basic-offset 2 c-default-style "linux")
-
+  (setq c-default-style "bsd")  
   ;; other customizations
   (setq tab-width 2
 	;; this will make sure spaces are used instead of tabs
