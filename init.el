@@ -64,8 +64,8 @@
 	go-mode
 	dash
 	s
-	f
-	editorconfig
+;;	f
+;;	editorconfig
 	jsonrpc))
 
 ;; Iterate on packages and install missing ones
