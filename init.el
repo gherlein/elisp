@@ -14,6 +14,9 @@
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
 
+;; supress warning When done with a buffer, type C-x #
+(setq server-client-instructions nil)
+
 ;; add mouse support
 ;;;; Mouse scrolling in terminal emacs
 (unless (display-graphic-p)
@@ -167,7 +170,7 @@
           (lambda ()
 	    (define-key js-mode-map (kbd "<f7>") 'json-pretty-print-buffer)))
 ;; Better imenu
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+(add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
 (setq js2-use-font-lock-faces t)
 
 
